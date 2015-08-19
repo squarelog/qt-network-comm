@@ -1,11 +1,8 @@
 SUMMARY
 
-I created these 2 Qt projects to quickly prototype/test Qt's networking facilities for an actual
-project at work which I designed and developed.
+I created these 3 Qt projects to quickly prototype/test Qt's networking facilities for an actual project at work which I was designing and developing.
 
-The client GUI is used to initiate a TCP connection to the link to the server which serves as the
-communication link to the 'embedded' system. The server listens on the default port 7755 for client
-console connnections. It also listens a connection from the 'embedded' system on port 7756.
+The client GUI is used to initiate a TCP connection to the link to the server which serves as the communication link to the 'embedded' system. The server listens on the default port 7755 for client console connnections. It also listens a connection from the 'embedded' system on port 7756.
 
 The port can be set on both the client and server GUI's. The server can handle multiple client console connections concurrently and keeps track of them. The actual project which this modelled had a network manager object which took on this task as well displaying the details off each connection. Also missing is securing the connection with SSL.
 
