@@ -8,18 +8,19 @@ QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = test-tcpsrv
+TARGET = embeddedsys-link
 TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    tcpworker.cpp
+    tcpworker.cpp \
+    embeddedsys-link.cpp
 
-HEADERS  += mainwindow.h \
+HEADERS  += \
     tcpworker.h \
     telemetry_source.h \
     telemetrydata.h \
-    telemetrydata.h
+    telemetrydata.h \
+    embeddedsys-link.h
 
-FORMS    += mainwindow.ui
+FORMS    += embeddedsys-link.ui

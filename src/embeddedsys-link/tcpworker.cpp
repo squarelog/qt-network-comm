@@ -1,6 +1,6 @@
 #include "tcpworker.h"
 
-#include "mainwindow.h"
+#include "embeddedsys-link.h"
 
 #include <QHash>
 //#include "windows.h"
