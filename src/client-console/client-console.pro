@@ -8,13 +8,13 @@ QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = test-tcpclient
+TARGET = client-console
 TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        client-console.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += client-console.h
 
-FORMS    += mainwindow.ui
+FORMS    += client-console.ui

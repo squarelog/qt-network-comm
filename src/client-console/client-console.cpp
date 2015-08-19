@@ -1,12 +1,12 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "client-console.h"
+#include "ui_client-console.h"
 #include <QPushButton>
 #include <time.h>
 
 
-MainWindow::MainWindow(QWidget *parent) :
+ClientConsole::ClientConsole(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::ClientConsole)
 {
 
     qsrand(time(NULL));
@@ -48,17 +48,17 @@ MainWindow::MainWindow(QWidget *parent) :
 
 }
 
-void MainWindow::update_IPaddress(QString ipaddress)
+void ClientConsole::update_IPaddress(QString ipaddress)
 {
     ipaddress_ = ipaddress;
 }
 
-void MainWindow::update_display()
+void ClientConsole::update_display()
 {
     ui->telemetryData->setText(telemetry_data_);
 }
 
-void MainWindow::disconnect_from_SCE()
+void ClientConsole::disconnect_from_SCE()
 {
     tcpsocket_->disconnectFromHost();
     connected_ = false;
@@ -67,7 +67,7 @@ void MainWindow::disconnect_from_SCE()
     ui->connectionStatus->setText("Status: disconnected from SCE");
 }
 
-void MainWindow::SCE_disconnected()
+void ClientConsole::SCE_disconnected()
 {
     connected_ = false;
     tcpsocket_->deleteLater();
@@ -75,7 +75,7 @@ void MainWindow::SCE_disconnected()
     ui->connectionStatus->setText("Status: SCE disconnected");
 }
 
-bool MainWindow::connect_to_SCE()
+bool ClientConsole::connect_to_SCE()
 {
     if(connected_) {
         return true;
@@ -103,7 +103,7 @@ bool MainWindow::connect_to_SCE()
     return true;
 }
 
-void MainWindow::send_message()
+void ClientConsole::send_message()
 {
     if( !connected_) {
         qDebug() << "not connected to host";
@@ -123,7 +123,7 @@ void MainWindow::send_message()
     }
 }
 
-void MainWindow::start_read()
+void ClientConsole::start_read()
 {
     /////////////////////////////////////////////
     QByteArray qstrbytes = tcpsocket_->readAll();
@@ -136,7 +136,7 @@ void MainWindow::start_read()
     emit telemetry_data_updated();
 }
 
-MainWindow::~MainWindow()
+ClientConsole::~ClientConsole()
 {
     disconnect(tcpsocket_, SIGNAL(disconnected()), this, SLOT(SCE_disconnected()));
     qDebug() << "Disconnecting from SCE.";

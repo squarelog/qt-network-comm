@@ -6,20 +6,20 @@
 #include <QHostAddress>
 
 namespace Ui {
-class MainWindow;
+class ClientConsole;
 }
 
-class MainWindow : public QMainWindow
+class ClientConsole : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+    explicit ClientConsole(QWidget *parent = 0);
+    ~ClientConsole();
 
     
 private:
-    Ui::MainWindow *ui;
+    Ui::ClientConsole *ui;
     QTcpSocket *tcpsocket_;
     uint mesg_count_;
     bool connected_;
