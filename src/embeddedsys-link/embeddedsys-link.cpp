@@ -10,8 +10,7 @@ QString telemetryData::telemetry_;
 QMutex telemetryData::mutex_;
 QString MainWindow::qCommandData_;
 
-void mydebug(QString funcinfo, QString str)
-{
+void mydebug(QString funcinfo, QString str) {
     qDebug() << funcinfo << "thread ID "
              << (int) QThread::currentThreadId()
              << str;
@@ -51,8 +50,7 @@ MainWindow::MainWindow(QWidget *parent) :
         qDebug() << "Listener started on port 7756";
     }
 
-    for(int num=0; num < 5; num++)
-    {
+    for(int num=0; num < 5; num++) {
         QString format = "Format";
         format.append(QString("%1").arg(num));
         telemetry_data_.insert( format, num);
@@ -69,8 +67,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::handle_telemetry_interrupts()
-{
+void MainWindow::handle_telemetry_interrupts() {
     mydebug(Q_FUNC_INFO, "telemetry source has made a connection");
     tcpTelemetrySocket_ = tcpTelemetryListener_->nextPendingConnection();
     connect(tcpTelemetrySocket_, SIGNAL(readyRead()), this, SLOT(read_telemetry_data()));
@@ -78,33 +75,26 @@ void MainWindow::handle_telemetry_interrupts()
     ui->telemetryFeedStatus->setText("Telemetry Source Status: connected");
 }
 
-void MainWindow::handle_telemetry_disconnect()
-{
+void MainWindow::handle_telemetry_disconnect() {
     ui->telemetryFeedStatus->setText("Telemetry Source Status: disconnected");
     tcpTelemetrySocket_->deleteLater();
 }
 
-void MainWindow::read_telemetry_data()
-{
+void MainWindow::read_telemetry_data() {
     QMutexLocker locker(&telemetryData::mutex_);
     QByteArray qstrbytes = tcpTelemetrySocket_->readAll();
     telemetryData::telemetry_ = qstrbytes;
-
     mydebug(Q_FUNC_INFO, qstrbytes);
-
-
     ui->telemetryDataDisplay->setText(qstrbytes);
     emit new_data_interrupt();
 }
 
-void MainWindow::display_commands()
-{
+void MainWindow::display_commands() {
     ui->commandsIssuedDisplay->setText(qCommandData_);
 }
 
 
-void MainWindow::handle_TE_disconnect()
-{
+void MainWindow::handle_TE_disconnect() {
     num_connections_--;
 
     mydebug(Q_FUNC_INFO, "TEClient disconnected");
@@ -113,11 +103,9 @@ void MainWindow::handle_TE_disconnect()
 
     ui->teStatus->setText(status_mesg);
     //worker_->deleteLater();
-
 }
 
-void MainWindow::handle_new_connection()
-{
+void MainWindow::handle_new_connection() {
     mydebug(Q_FUNC_INFO, "TEClient disconnected");
 
     tcpCommandSocket_ = tcpListener_->nextPendingConnection();

@@ -36,8 +36,7 @@ void tcpworker::send_telemetry_data()
     QMutexLocker locker(&telemetryData::mutex_);
     QString telemetry_mesg = telemetryData::telemetry_;
 
-    if(telemetry_mesg.isEmpty())
-    {
+    if(telemetry_mesg.isEmpty()) {
         qDebug() << "Nothing to send to client.";
         return;
     }
@@ -47,14 +46,12 @@ void tcpworker::send_telemetry_data()
     tcpSock_->flush();
 }
 
-void tcpworker::worker_exit()
-{
+void tcpworker::worker_exit() {
     mydebug(Q_FUNC_INFO, "quitting.");
     quit_=true;
 }
 
-void tcpworker::connection_broken()
-{
+void tcpworker::connection_broken() {
     mydebug(Q_FUNC_INFO, "client connection broken.");
 
     if(!quit_)
@@ -63,8 +60,7 @@ void tcpworker::connection_broken()
 }
 
 
-void tcpworker::start_read()
-{
+void tcpworker::start_read() {
 
     /////////////////////////////////////////////
     QByteArray qstrbytes = tcpSock_->readAll();
